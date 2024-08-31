@@ -1,7 +1,6 @@
 FROM postgres:15.6-alpine AS build
 
 ENV PG_PARTMAN_VERSION=v4.7.3
-ENV WAL2JSON_VERSION=wal2json_2_6
 
 # Install the packages which will be required to get everything to compile
 RUN set -ex \
@@ -26,19 +25,6 @@ RUN wget -O pg_partman.tar.gz "https://github.com/pgpartman/pg_partman/archive/$
     && cd /usr/src/pg_partman \
     && make && make install \
     && rm -rf /usr/src/pg_partman
-
-RUN wget -O wal2json.tar.gz "https://github.com/eulerto/wal2json/archive/refs/tags/$WAL2JSON_VERSION.tar.gz" \
-    # Create a folder to put the src files in
-    && mkdir -p /usr/src/wal2json \
-    # Extract the src files
-    && tar \
-        --extract \
-        --file wal2json.tar.gz \
-        --directory /usr/src/wal2json \
-        --strip-components 1 \
-    && rm wal2json.tar.gz && cd /usr/src/wal2json \
-    && make && make install \
-    && rm -rf /usr/src/wal2json
 
 # Delete the dependencies for downloading and building the extensions, we no longer need them
 RUN apk del .fetch-deps .build-deps

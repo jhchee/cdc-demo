@@ -53,6 +53,7 @@ services:
       dockerfile: postgres.Dockerfile
     networks:
       - cdc-demo-network
+    hostname: postgres
     environment:
       POSTGRES_USER: 'postgres'
       POSTGRES_PASSWORD: 'password'
@@ -61,6 +62,7 @@ services:
 
   debezium:
     image: debezium/connect:1.9
+    hostname: debezium
     ports:
       - "8083:8083"
     networks:
@@ -84,6 +86,16 @@ services:
     depends_on:
       - kafka
       - postgres
+
+  debezium-ui:
+    image: debezium/debezium-ui:1.9
+    hostname: debezium-ui
+    ports:
+      - "8081:8080"
+    networks:
+      - cdc-demo-network
+    environment:
+      KAFKA_CONNECT_URIS: http://debezium:8083
 
 networks:
   cdc-demo-network:
