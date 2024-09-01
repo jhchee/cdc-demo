@@ -119,7 +119,7 @@ services:
     image: debezium/debezium-ui:2.5
     hostname: debezium-ui
     ports:
-      - "8082:8080"
+      - "8888:8080"
     networks:
       - cdc-demo-network
     environment:
