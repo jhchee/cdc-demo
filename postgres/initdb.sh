@@ -13,9 +13,6 @@ echo "pg_partman_bgw.role = '$POSTGRES_USER'" >> $PGDATA/postgresql.conf
 echo "pg_partman_bgw.dbname = '$POSTGRES_DB'" >> $PGDATA/postgresql.conf
 echo "listen_addresses = '*'" >> $PGDATA/postgresql.conf
 echo "wal_level = logical" >> $PGDATA/postgresql.conf
-echo "max_wal_senders = 4" >> $PGDATA/postgresql.conf
-echo "max_replication_slots = 4" >> $PGDATA/postgresql.conf
-
 
 # Allow replication connections
 { echo "host replication $POSTGRES_USER 0.0.0.0/0 trust"; } >> "$PGDATA/pg_hba.conf"
