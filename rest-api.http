@@ -12,7 +12,7 @@ Content-Type: application/json
   "config": {
     "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
     "database.dbname": "postgres",
-    "database.history.kafka.bootstrap.servers": "kafka:9092",
+    "database.history.kafka.bootstrap.servers": "broker:9092",
     "database.history.kafka.topic": "schema-changes.movies",
     "database.hostname": "postgres",
     "database.password": "password",
