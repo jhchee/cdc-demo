@@ -112,6 +112,8 @@ services:
     depends_on:
       - broker
       - postgres
+    volumes:
+      - ./jars:/kafka/connect/libs
 
   debezium-ui:
     image: debezium/debezium-ui:2.5

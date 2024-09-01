@@ -33,3 +33,36 @@ Content-Type: application/json
 }
 
 ###
+
+POST http://localhost:8083/connectors
+Content-Type: application/json
+
+{
+  "name": "movies-db-avro-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "database.dbname": "postgres",
+    "database.history.kafka.bootstrap.servers": "broker:9092",
+    "database.history.kafka.topic": "schema-changes.movies-avro",
+    "database.hostname": "postgres",
+    "database.password": "password",
+    "database.port": "5432",
+    "database.server.name": "postgres",
+    "database.user": "postgres",
+    "name": "movies-db-avro-connector",
+    "plugin.name": "pgoutput",
+    "table.include.list": "public.movies",
+    "tasks.max": "1",
+    "topic.creation.default.cleanup.policy": "delete",
+    "topic.creation.default.partitions": "1",
+    "topic.creation.default.replication.factor": "1",
+    "topic.creation.default.retention.ms": "604800000",
+    "topic.creation.enable": "true",
+    "topic.prefix": "postgres",
+    "key.converter.schema.registry.url": "http://schema-registry:8081",
+    "value.converter.schema.registry.url": "http://schema-registry:8081",
+    "key.converter": "io.confluent.connect.avro.AvroConverter",
+    "value.converter": "io.confluent.connect.avro.AvroConverter",
+    "slot.name" : "debezium_avro"
+  }
+}
